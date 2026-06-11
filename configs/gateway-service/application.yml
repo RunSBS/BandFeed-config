@@ -4,6 +4,25 @@ server:
 spring:
   application:
     name: gateway-service
+  cloud:
+    gateway:
+      routes:
+        - id: user-service
+          uri: lb://user-service
+          predicates:
+            - Path=/api/users/**, /api/follows/**
+        - id: band-service
+          uri: lb://band-service
+          predicates:
+            - Path=/api/bands/**, /api/timeline-posts/**
+        - id: wiki-service
+          uri: lb://wiki-service
+          predicates:
+            - Path=/api/songs/**, /api/wiki-posts/**
+        - id: chat-service
+          uri: lb://chat-service
+          predicates:
+            - Path=/api/chat-rooms/**, /api/chat-messages/**
 
 eureka:
   client:
@@ -11,3 +30,6 @@ eureka:
       defaultZone: http://eureka-server:8761/eureka/
   instance:
     prefer-ip-address: true
+
+jwt:
+  secret: ${JWT_SECRET}
