@@ -20,6 +20,22 @@ spring:
             allowedHeaders:
               - "*"
             allowCredentials: true
+      server:
+        webflux:
+          globalcors:
+            cors-configurations:
+              '[/**]':
+                allowedOrigins:
+                  - "http://3.35.71.18"
+                allowedMethods:
+                  - GET
+                  - POST
+                  - PUT
+                  - DELETE
+                  - OPTIONS
+                allowedHeaders:
+                  - "*"
+                allowCredentials: true
       routes:
         - id: user-service
           uri: lb://user-service
